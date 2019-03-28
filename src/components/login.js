@@ -14,7 +14,6 @@ const Login = (props) => {
         } else {
             setErrorText("Incorrect username or password");
         }
-        
     }
 
     const handleChange = (event) => {
