@@ -47,8 +47,10 @@ export default class App extends Component {
               handleUserLogin={this.handleUserLogin}
               loggedInStatus={this.state.loggedInStatus}
               />
-            }
+              }
             />
+
+            <Route path="/login/new_user" />
           </div>
         </Router>
 
