@@ -10,7 +10,7 @@ const HomePage = (props) => {
     return (
         <div>
             <h1>Hello world</h1>
-
+            {console.log(props.loggedInStatus)}
         </div>
     );
 }
