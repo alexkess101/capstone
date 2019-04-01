@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import HomePage from './homePage';
 import Login from './login';
+import Cookies from 'js-cookie';
+
 
 export default class App extends Component {
   constructor() {
@@ -15,13 +17,16 @@ export default class App extends Component {
     this.handleUserLogout = this.handleUserLogout.bind(this);
   }
 
-  handleUserLogin() {
+  handleUserLogin(email) {
+    Cookies.set('session', 'LOGGED_IN');
+
     this.setState({
       loggedInStatus: "LOGGED_IN"
     })
   }
 
   handleUserLogout() {
+    Cookies.remove('session')
     this.setState({
       loggedInStatus: "NOT_LOGGED_IN"
     })

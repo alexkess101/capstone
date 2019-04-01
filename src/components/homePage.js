@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import Cookies from 'js-cookie';
+
 
 const HomePage = (props) => {
-    
+
 
 
     useEffect(() => {
-        if (props.loggedInStatus === "NOT_LOGGED_IN") {
+        console.log(Cookies.get('session'))
+        if (Cookies.get('session') !== 'LOGGED_IN') {
             props.history.push('/login')
         }
     })

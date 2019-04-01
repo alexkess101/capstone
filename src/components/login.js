@@ -51,7 +51,7 @@ const Login = (props) => {
         .then(responseData => {
             for (let i = 0; i < responseData.length; i++) {
                 if (email === responseData[i][1] && password === responseData[i][2]) {
-                    props.handleUserLogin();
+                    props.handleUserLogin(email);
                     props.history.push('/');
                 } else {
                     setErrorText("Incorrect username or password");
