@@ -8,10 +8,8 @@ const Login = (props) => {
     const [password, setPassword] = useState("");
     const [numSalesGoal, setNumSalesGoal] = useState(0);
     const [commissionPercentage, setCommissionPercentage] = useState();
-    const [signingBonus, setSigningBonus] = useState();
-    const [incentives, setIncentives] = useState(0);
     const [incomeTotal, setIncomeTotal] = useState(0);
-    const [expenses, setExpenses] = useState(0);
+    
 
     const [numSalesGoalValues, setNumSalesGoalValues] = useState([])
     const [incomeTotalValues, setIncomeTotalValues] = useState([])
@@ -21,6 +19,11 @@ const Login = (props) => {
 
 
     useEffect(() => {
+        // if (account === 'LOGIN') {
+        //     props.history.push('/')
+        // }
+
+
         let numSalesGoalValueList = [];
         let incomeTotalValueList = [];
         for (let i = 5; i <= 2000; i = i + 5) {
@@ -34,6 +37,8 @@ const Login = (props) => {
         setIncomeTotalValues(incomeTotalValueList);
     }, [])
 
+
+
     const handleSubmit = () => {
         fetch("http://localhost:5000/login", {
             method: "GET",
@@ -44,7 +49,6 @@ const Login = (props) => {
         })
         .then(response => {return response.json();})
         .then(responseData => {
-            console.log(responseData);
             for (let i = 0; i < responseData.length; i++) {
                 if (email === responseData[i][1] && password === responseData[i][2]) {
                     props.handleUserLogin();
@@ -68,12 +72,13 @@ const Login = (props) => {
     const handleCreateUser = (event) => {
         let addEmail = email;
         let addPassword = password;
+        let addCurrentSales = 0;
         let addNumSalesGoal = numSalesGoal;
-        let addCommissionPercentage = commissionPercentage;
-        let addSigningBonus = signingBonus;
-        let addIncentives = incentives;
+        let addIncomeCurrent = 0;
         let addIncomeTotal = incomeTotal;
-        let addExpenses = expenses;
+        let addCommissionPercentage = commissionPercentage;
+        
+       
         
         fetch("http://localhost:5000/login/new_user", {
             method: 'POST',
@@ -84,21 +89,25 @@ const Login = (props) => {
             body: JSON.stringify({
                 email: addEmail,
                 password: addPassword,
+                current_sales: addCurrentSales,
                 num_sales_goal: addNumSalesGoal,
-                commission_percentage: addCommissionPercentage,
-                signing_bonuses: addSigningBonus,
-                incentives: addIncentives,
+                income_current: addIncomeCurrent,
                 income_total: addIncomeTotal,
-                expenses: addExpenses
+                commission_percentage: addCommissionPercentage
             })
         })
         .then(response => {return response.json();})
-        .then(responseData => {console.log(responseData);})
-        .then(() => {props.history.push("/"); props.handleUserLogin();})
+        .then(responseData => {return responseData})
+        .then(() => {
+            props.handleUserLogin();
+            props.history.push("/");
+        })
         .catch(err => {
             console.log(err)
         })
         event.preventDefault();
+        
+        
         
         
     }
@@ -111,8 +120,7 @@ const Login = (props) => {
             {
                 account === "LOGIN" ? <h1>This is the login page</h1> : <h1>Welcome to clear money! </h1>
             }
-            
-            {console.log(props.loggedInStatus)}
+    
             <form onSubmit={() => account === "LOGIN" ? handleSubmit(event) : handleCreateUser(event)}>
                 <div className="form">
                     <input
@@ -172,24 +180,7 @@ const Login = (props) => {
                                     onChange={event => setCommissionPercentage(event.target.value)}
                                 />
                             </div>
-
-                            <div>
-                                <input
-                                    type="number"
-                                    min = "0"
-                                    name="signing_bonus"
-                                    placeholder="Signing bonus"
-                                    value={signingBonus}
-                                    onChange={event => setSigningBonus(event.target.value)}
-                                />
-                            </div>
-
-                          
-
-
                         </div> : null
-                    
-
                 }
                 <button type="submit">Submit</button>
 `

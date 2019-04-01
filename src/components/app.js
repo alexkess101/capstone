@@ -37,6 +37,7 @@ export default class App extends Component {
                 <HomePage
                 {...props}
                 loggedInStatus={this.state.loggedInStatus}
+                handleUserLogout={this.handleUserLogout}
                 />
               } 
             />
