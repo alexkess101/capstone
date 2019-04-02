@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, NavLink } from 'react-router-dom';
 import { withRouter } from 'react-router';
+import DatePicker from "react-datepicker";
+import moment from 'moment-range';
+import "react-datepicker/dist/react-datepicker.css";
 
 const createAccount = (props) => {
     const [email, setEmail] = useState("");
@@ -8,6 +11,8 @@ const createAccount = (props) => {
     const [numSalesGoal, setNumSalesGoal] = useState(0);
     const [commissionPercentage, setCommissionPercentage] = useState();
     const [incomeTotal, setIncomeTotal] = useState(0);
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date());
 
     const [numSalesGoalValues, setNumSalesGoalValues] = useState([])
     const [incomeTotalValues, setIncomeTotalValues] = useState([])
@@ -102,37 +107,46 @@ const createAccount = (props) => {
                             />
                         </div>
                         {errorText !== "" ? <div>{errorText}</div> : null }
-
-                    
-                                <div>
-                                    <div>
-                                        <select value={numSalesGoal} onChange={(event) => setNumSalesGoal(event.target.value)}>
-                                            {numSalesGoalValues.map((value, index) => {
-                                                return <option key = {index} value={value}>{value}</option>
-                                            })}
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <select value={incomeTotal} onChange={event => setIncomeTotal(event.target.value)}>
-                                            {incomeTotalValues.map((value, index) => {
-                                                return <option key = {index}value={value}>{value}</option>
-                                            })}
-                                        </select>
-                                    </div>
-                                    
-                                    <div>
-                                        <input
-                                            type="number"
-                                            step = "0.01"
-                                            min = "0"
-                                            name="commission_percentage"
-                                            placeholder="00.00"
-                                            value={commissionPercentage}
-                                            onChange={event => setCommissionPercentage(event.target.value)}
-                                        />
-                                    </div>
-                                </div>
                         
+                                <DatePicker
+                                    className="datepicker"
+                                    selected={startDate}
+                                    onChange={date => setStartDate(date)}
+                                />
+                                <DatePicker
+                                    className="datepicker"
+                                    selected={endDate}
+                                    onChange={date => setEndDate(date)}
+                                />      
+                        <div>
+                            <div>
+                                <select value={numSalesGoal} onChange={(event) => setNumSalesGoal(event.target.value)}>
+                                    {numSalesGoalValues.map((value, index) => {
+                                        return <option key = {index} value={value}>{value}</option>
+                                    })}
+                                </select>
+                            </div>
+                            <div>
+                                <select value={incomeTotal} onChange={event => setIncomeTotal(event.target.value)}>
+                                    {incomeTotalValues.map((value, index) => {
+                                        return <option key = {index}value={value}>{value}</option>
+                                    })}
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <input
+                                    type="number"
+                                    step = "0.01"
+                                    min = "0"
+                                    name="commission_percentage"
+                                    placeholder="00.00"
+                                    value={commissionPercentage}
+                                    onChange={event => setCommissionPercentage(event.target.value)}
+                                />
+                            </div>
+                        </div>
+                
                         <button type="submit">Submit</button>
 
                         <div className="login-link">

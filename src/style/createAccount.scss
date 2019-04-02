@@ -20,3 +20,12 @@
 .create-account-wrapper > h1 {
     margin: 0;
 }
+
+.datepicker {
+    background-color: $grey;
+    border: $greyer;
+    color: grey;
+    border-radius: 4px;
+    font-family: $titillium;
+    font-size: .9em;
+}
