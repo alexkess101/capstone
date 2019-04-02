@@ -1,0 +1,14 @@
+$green:#9AFFA2;
+$blueGreen: #83EFCF;
+$white: #FCFDFD;
+$darkBlue: #012154;
+$darkGreen: #3D9160;
+$titillium: 'Titillium Web', sans-serif;
+$quicksand: 'Quicksand', sans-serif;
+
+@mixin center() {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}

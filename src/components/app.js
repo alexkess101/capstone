@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import HomePage from './homePage';
 import Login from './login';
+import CreateAccount from './createAccount';
+import Home from './homePage';
 import Cookies from 'js-cookie';
+
 
 
 export default class App extends Component {
@@ -17,7 +19,7 @@ export default class App extends Component {
     this.handleUserLogout = this.handleUserLogout.bind(this);
   }
 
-  handleUserLogin(email) {
+  handleUserLogin() {
     Cookies.set('session', 'LOGGED_IN');
 
     this.setState({
@@ -38,16 +40,8 @@ export default class App extends Component {
 
         <Router>
           <div>
-            <Route exact path="/" render={props => 
-                <HomePage
-                {...props}
-                loggedInStatus={this.state.loggedInStatus}
-                handleUserLogout={this.handleUserLogout}
-                />
-              } 
-            />
 
-            <Route path="/login" render={props =>
+            <Route exact path="/" render={props =>
               <Login
               {...props}
               handleUserLogin={this.handleUserLogin}
@@ -55,8 +49,30 @@ export default class App extends Component {
               />
               }
             />
+            {
+              Cookies.get('session') === "LOGGED_IN" ? 
+              <Route path="/home" render={props => 
+                <Home
+                  {...props}
+                  loggedInStatus={this.state.loggedInStatus}
+                  handleUserLogin={this.handleUserLogin}            
+                  handleUserLogout={this.handleUserLogout}
+                /> 
+              
+              } 
+            /> : null
+            }
+            
 
-            <Route path="/login/new_user" />
+            <Route path="/new_user" render={props =>
+              <CreateAccount
+                {...props}
+                  loggedInStatus={this.state.loggedInStatus}
+                  handleUserLogin={this.handleUserLogin}            
+                  handleUserLogout={this.handleUserLogout}
+              />
+            
+            }/>
           </div>
         </Router>
 
