@@ -8,17 +8,81 @@
     .create-account-container {
         @include center();
         background-color: $white;
-        width: 430px;
-        height: 600px;
+        width: 500px;
+        height: 540px;
         border-radius: 10px;
         box-shadow: 0px 0px 14px -2px rgba(164,169,176,1);
+        margin-top: -100px;
+        opacity: 0;
+
+        .create-account-wrapper {
+            @include center();
+            .email-password-form {
+                margin-bottom: 11px;
+
+                .form {
+                    margin-top: 10px;
+                    
+                    input {
+                        height: 50px;
+                    }
+                }
+            }
+            
+
+            .date-picker-forms {
+                @include center();
+                flex-direction: row;
+                justify-content: space-around;
+                margin-bottom: 7px;
+                
+
+                input {
+                    text-align: center;
+                    width: 170px;
+                    height: 33px;
+                    border: 1px solid $greyer;
+                }
+            }
+
+            #button {
+                height: 73px;
+                margin-top: -5px;
+            }
+        }
 
     }
     
 }
 
+.select-forms {
+    font-family: $titillium;
+    @include center();
+    flex-direction:row;
+    justify-content: space-around;
+    margin-bottom: 7px;
+    
+
+    select {
+    background-color: $grey;
+    color: grey;
+    border: 1px solid $greyer;
+    width: 170px;
+    height: 35px;
+
+   
+
+    }
+   
+}
+
+
+
 .create-account-wrapper > h1 {
     margin: 0;
+    font-size: 3.3em;
+    margin-bottom: 20px;
+    letter-spacing: 0px;
 }
 
 .datepicker {
@@ -28,4 +92,21 @@
     border-radius: 4px;
     font-family: $titillium;
     font-size: .9em;
+}
+
+.commission-form {
+    margin-bottom: 16px;
+
+    input {
+        height: 50px;
+    }
+}
+
+.login-link {
+    @include center();
+    flex-direction: row;
+    font-family: $titillium;
+    margin-top: 7px;
+    font-size: 0.9em;
+    letter-spacing: 1px;
 }

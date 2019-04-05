@@ -12,25 +12,35 @@ export default class App extends Component {
     super()
 
     this.state = {
-      loggedInStatus: "NOT_LOGGED_IN"
+      loggedInStatus: "NOT_LOGGED_IN",
+      userId: "",
+      userEmail: ""
+
     }
 
     this.handleUserLogin = this.handleUserLogin.bind(this);
     this.handleUserLogout = this.handleUserLogout.bind(this);
   }
 
-  handleUserLogin() {
+  handleUserLogin(userId, userEmail) {
     Cookies.set('session', 'LOGGED_IN');
-
+    Cookies.set('session_id', userId);
+    Cookies.set('session_email', userEmail);
+    
     this.setState({
-      loggedInStatus: "LOGGED_IN"
+      loggedInStatus: "LOGGED_IN",
     })
+    
   }
 
   handleUserLogout() {
-    Cookies.remove('session')
+    Cookies.remove('session');
+    Cookies.remove('session_id');
+    Cookies.remove('session_email');
+
     this.setState({
       loggedInStatus: "NOT_LOGGED_IN"
+
     })
   }
 
@@ -51,12 +61,14 @@ export default class App extends Component {
             />
             {
               Cookies.get('session') === "LOGGED_IN" ? 
-              <Route path="/home" render={props => 
+              <Route path="/home/:id" render={props => 
                 <Home
                   {...props}
                   loggedInStatus={this.state.loggedInStatus}
                   handleUserLogin={this.handleUserLogin}            
                   handleUserLogout={this.handleUserLogout}
+                  userId={this.state.userId}
+                  userEmail={this.state.userEmail}
                 /> 
               
               } 

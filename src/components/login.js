@@ -1,36 +1,55 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, NavLink } from 'react-router-dom';
 import { withRouter } from 'react-router';
+import { TimelineMax, CSSPlugin, ScrollToPlugin, Draggable, TimelineLite } from "gsap/all";
 
 
 const Login = (props) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errorText, setErrorText] = useState("");
+    const [idValue, setID] = useState();
+
+    useEffect(() => {
+        let t1 = new TimelineLite();
+
+        t1.to('.login-container', 0.4, {y:50, opacity:1});
+
+    }, [])
 
     const handleSubmit = () => {
-        
+        event.preventDefault();
+        let addEmail = email;
+        let addPassword = password;
+
         fetch("http://localhost:5000/login", {
-            method: "GET",
+            method: "POST",
             headers: {
                 "accepts": "application/json",
                 "Content-Type": "application/json"
-            }
+            },
+            body: JSON.stringify({
+                email: addEmail,
+                password: addPassword
+            })
         })
-        .then(response => {return response.json();})
+        .then(data => { return data.json() })
         .then(responseData => {
-            
-            for (let i = 0; i < responseData.length; i++) {
-                if (email == responseData[i][1] && password == responseData[i][2]) {
-                    
-                    props.handleUserLogin();
-                    props.history.push('/home');
-                } else {
-                    setErrorText("Incorrect username or password");
-                }
+
+            if(require('password-hash').verify(password, responseData[0][2])){
+                let id = responseData[0][0];
+                let email = responseData[0][1];
+                props.handleUserLogin(id, email);
+                props.history.push(`/home/${id}`);
+            } else {
+                setErrorText("Incorrect password");
             }
         })
-        event.preventDefault();
+        .catch(err => {
+            setErrorText("Email does not exist")
+            console.log(err)
+        })
+      
     }
 
 
@@ -43,7 +62,7 @@ const Login = (props) => {
                 <div className="login-wrapper">
                     <h1>Clearer</h1>
                     <form onSubmit={handleSubmit} className="login-form">
-                    {errorText !== "" ? <div id="error">{errorText}</div> : <div id ='error'></div>}
+                        {errorText !== "" ? <div id="error">{errorText}</div> : <div id ='error'></div>}
                         <div className="form">
                             <input
                                 type="email"
