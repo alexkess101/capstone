@@ -17,7 +17,7 @@ const HomePage = (props) => {
                 }
             })
             .then(result => {return result.json()})
-            .then(resultData => {setData(resultData.data); console.log(data, resultData)})
+            .then(resultData => {setData(resultData); console.log(data, resultData)})
             .catch(err => {console.log(err)})
         }
         
