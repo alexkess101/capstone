@@ -69,7 +69,7 @@ const createAccount = (props) => {
         let addCommissionPercentage = commissionPercentage;
         
         
-        fetch("http://localhost:5000/new_user", {
+        fetch("https://ak-clearsummer.herokuapp.com/new_user", {
             method: 'POST',
             headers: {
                 "accepts": "application/json",

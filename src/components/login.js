@@ -24,7 +24,7 @@ const Login = (props) => {
         let addEmail = email;
         let addPassword = password;
 
-        fetch("http://localhost:5000/login", {
+        fetch("https://ak-clearsummer.herokuapp.com/login", {
             method: "POST",
             headers: {
                 "accepts": "application/json",

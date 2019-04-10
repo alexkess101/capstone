@@ -26,7 +26,7 @@ export default class HomePage extends Component{
 
     componentDidMount(){
 
-        fetch(`http://localhost:5000/home/${Cookies.get('session_id')}`, {
+        fetch(`https://ak-clearsummer.herokuapp.com/home/${Cookies.get('session_id')}`, {
             method: 'GET',
             headers: {
                 "accepts": "application/json",

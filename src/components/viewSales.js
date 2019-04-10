@@ -17,7 +17,7 @@ export default class ViewSales extends Component {
     }
 
     componentDidMount() {
-        fetch(`http://localhost:5000/sale/${Cookies.get('session_id')}/view_sales`, {
+        fetch(`https://ak-clearsummer.herokuapp.com/sale/${Cookies.get('session_id')}/view_sales`, {
             method: ['GET'],
             headers: {
                 "accepts": "application/json",

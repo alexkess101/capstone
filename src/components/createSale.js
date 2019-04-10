@@ -23,7 +23,7 @@ export default class CreateSale extends Component {
         let addValue = parseFloat(this.state.value);
 
         event.preventDefault();
-        fetch(`http://localhost:5000/home/${Cookies.get('session_id')}/create_sale`, {
+        fetch(`https://ak-clearsummer.herokuapp.com/home/${Cookies.get('session_id')}/create_sale`, {
             method: 'POST',
             headers: {
                 "accepts": "application/json",
