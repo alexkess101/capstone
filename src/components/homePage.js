@@ -11,7 +11,9 @@ export default class HomePage extends Component{
 
         this.state = {
             data: [],
-            valueArray: []
+            valueArray: [],
+            startDate: "",
+            endDate: ""
         }
 
         this.logout = this.logout.bind(this);
@@ -28,7 +30,11 @@ export default class HomePage extends Component{
             }
         })
         .then(result => {return result.json()})
-        .then(resultData => {this.setState({data:resultData}); this.setState({valueArray: resultData[4]})})
+        .then(resultData => {this.setState({data:resultData}); this.setState({
+            valueArray: resultData[4],
+            startDate: resultData[6],
+            endDate: resultData[7]
+        })})
         .catch(err => {console.log(err)})
 
         let t1 = new TimelineLite();
@@ -73,7 +79,7 @@ export default class HomePage extends Component{
                         
                         
                     </div>
-                    
+                    {console.log((Date.parse(this.state.endDate[0]) - Date.parse(this.state.startDate[0])) / 86400000)}
                     <button onClick={this.logout} className="logout-button">Logout</button>
                 </div>
                 
