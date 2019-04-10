@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { withRouter } from 'react-router';
-import { TimelineMax, CSSPlugin, ScrollToPlugin, Draggable, TimelineLite } from "gsap/all";
-
+import { TimelineLite } from "gsap/all";
+import LoadingOverlay from 'react-loading-overlay';
 
 const Login = (props) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errorText, setErrorText] = useState("");
-    const [idValue, setID] = useState();
+    const [isLoaded, setIsLoadedValue] = useState(false);
+    
 
     useEffect(() => {
         let t1 = new TimelineLite();
@@ -18,6 +19,7 @@ const Login = (props) => {
     }, [])
 
     const handleSubmit = () => {
+        setIsLoadedValue(true);
         event.preventDefault();
         let addEmail = email;
         let addPassword = password;
@@ -42,12 +44,14 @@ const Login = (props) => {
                 props.handleUserLogin(id, email);
                 props.history.push(`/home/${id}`);
             } else {
+                setIsLoadedValue(false)
                 setErrorText("Incorrect password");
             }
         })
         .catch(err => {
-            setErrorText("Email does not exist")
-            console.log(err)
+            setIsLoadedValue(false);
+            setErrorText("Email does not exist");
+            console.log(err);
         })
       
     }
@@ -57,6 +61,12 @@ const Login = (props) => {
 
 
     return (
+        <LoadingOverlay
+            active={isLoaded}
+            spinner
+            text="Loading..."
+            fadeSpeed={200}
+            >
         <div className = 'login'>
             <div className="login-container">
                 <div className="login-wrapper">
@@ -76,7 +86,7 @@ const Login = (props) => {
                                 }
                             />
                         </div>
-
+                            
                         <div className="form">
                             <input type="password"
                                 type="password"
@@ -102,6 +112,7 @@ const Login = (props) => {
                 </div>
             </div>
         </div>
+        </LoadingOverlay>
     );
 }
 

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import LoadingOverlay from 'react-loading-overlay';
 
 
 const createAccount = (props) => {
@@ -13,6 +14,7 @@ const createAccount = (props) => {
     const [incomeTotal, setIncomeTotal] = useState(0);
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
+    const [isLoaded, setIsLoadedValue] = useState(false);
 
     const [numSalesGoalValues, setNumSalesGoalValues] = useState([])
     const [incomeTotalValues, setIncomeTotalValues] = useState([])
@@ -55,8 +57,11 @@ const createAccount = (props) => {
     }
 
     const handleCreateUser = () => {
+        setIsLoadedValue(true);
         let addEmail = email;
         let addPassword = require('password-hash').generate(password);
+        let addStartDate = startDate;
+        let addEndDate = endDate;
         let addCurrentSales = 0;
         let addNumSalesGoal = numSalesGoal;
         let addIncomeCurrent = 0;
@@ -73,6 +78,8 @@ const createAccount = (props) => {
             body: JSON.stringify({
                 email: addEmail,
                 password: addPassword,
+                start_date: addStartDate,
+                end_date: addEndDate,
                 current_sales: addCurrentSales,
                 num_sales_goal: addNumSalesGoal,
                 income_current: addIncomeCurrent,
@@ -83,13 +90,13 @@ const createAccount = (props) => {
         .then(response => {return response.json();})
         .then(responseData => {return responseData})
         .then((data) => {
-            
             let id = data[0][0];
             let email = data[0][1];
             props.handleUserLogin(id, email);
             props.history.push(`/home/${id}`);
         })
         .catch(err => {
+            setIsLoadedValue(false)
             setErrorText("Sorry, email already exists")
             console.log(err)
         })
@@ -97,6 +104,12 @@ const createAccount = (props) => {
     }
 
     return (
+        <LoadingOverlay
+            active={isLoaded}
+            spinner
+            text="Loading..."
+            fadeSpeed={200}
+            >
         <div className="create-account">
             <div className="create-account-container">
                 <div className="create-account-wrapper">
@@ -190,10 +203,10 @@ const createAccount = (props) => {
                         </div>
                         
                 
-                        <button type="submit" id="button" style={password != "" && commissionPercentage != null ? {backgroundColor: '#3D9160', color: '#012154'} : null} >Login</button>
+                        <button type="submit" id="button" style={password != "" && commissionPercentage != null ? {backgroundColor: '#3D9160', color: '#012154'} : null} >Create Account</button>
 
                         <div className="login-link">
-                            <div>Already have an account?</div> <NavLink to="/"> Login</NavLink>
+                            Already have an account? <NavLink to="/"> Login</NavLink>
                         </div>
                         
                         
@@ -202,6 +215,7 @@ const createAccount = (props) => {
                 </div>
             </div>
         </div>
+        </LoadingOverlay>
     );
 }
 

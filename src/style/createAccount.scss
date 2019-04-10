@@ -105,8 +105,17 @@
 .login-link {
     @include center();
     flex-direction: row;
-    font-family: $titillium;
+    font-family: $quicksand;
     margin-top: 7px;
     font-size: 0.9em;
     letter-spacing: 1px;
+
+    a {
+        color: #3D9160;
+        transition: 0.3s ease-in-out;
+        &:hover {
+            text-decoration: none;
+            color: #83efcf;
+        }
+    }
 }
