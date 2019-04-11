@@ -107,8 +107,12 @@ export default class HomePage extends Component{
         return (
             <div className="homepage">
                 <div className="left-column">
+                    <div className="menu">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                    
                     <div className="user-info">
-                        <i class="fas fa-user"></i>
+                        <i class="fas fa-user" onClick={this.handleToggle}></i>
                     </div>
                     <div className="user-email">Welcome {Cookies.get('session_email')}</div>
                     <div className="nav-links">

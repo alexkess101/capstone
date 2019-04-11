@@ -1,0 +1,47 @@
+@media (max-width: 810px) {
+    .nav-links, .logout-button, .user-email, .user-info {
+        visibility: hidden;
+    }
+    
+
+    .homepage {
+        display: grid;
+        grid-template-columns: 1fr;
+        
+        .left-column {
+            display: block;
+            height: 55px;
+            width: 100%;
+            .menu {
+                visibility: visible;
+                
+                i {
+                    color: $darkBlue;
+                    font-size: 2.1em;
+                    margin-top: 9px;
+                    margin-left: 7px;
+                }
+                
+            }
+            
+        }
+
+        .right-column {
+            margin-top: 75px;
+            position: static;
+            grid-template-columns: 1fr;
+            grid-gap: 15px;
+            padding-left: 0;
+            width: 100%;
+        
+            .tablet {
+                width: 400px;
+                height: 300px;
+                
+
+            }
+        }
+    }
+}
+
+

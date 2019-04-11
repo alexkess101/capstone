@@ -1,5 +1,6 @@
 .homepage{
     display:flex;
+    width: 100%;
 }
 
 .left-column {
@@ -12,6 +13,10 @@
     @include center();
     justify-content: space-between;
     opacity: 0;
+
+    .menu {
+        visibility: hidden;
+    }
 
     .user-info {
         margin-top: 30px;
@@ -117,3 +122,4 @@
 
 
 }
+
