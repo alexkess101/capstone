@@ -130,14 +130,14 @@ export default class HomePage extends Component{
                     <div className="tablet-wrapper">
                         <div className="tablet progress-tablet">
                             <h3>Sales Goal: {this.state.data[0]}</h3>
-                            <h3>Current Sales: {this.state.data[1]}</h3>
+                            <h3>Current income: {this.state.data[1]}</h3>
                         
                         </div>
                     </div>
                     <div className="tablet-wrapper">
                         <div className="tablet sales-tablet">
                             <h3>Goal: {this.state.data[2]}</h3>
-                            <h3>Current income: {this.state.data[3]}</h3>
+                            <h3>Current sales: {this.state.data[3]}</h3>
 
 
                             <NavLink to={`/home/${Cookies.get('session_id')}/view_sales`}>Click Here to view all your sales</NavLink>
