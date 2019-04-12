@@ -1,6 +1,10 @@
 @media (max-width: 810px) {
-    .nav-links, .logout-button, .user-email, .user-info {
+    .nav-links, .user-email, .user-info {
         visibility: hidden;
+    }
+
+    .visible {
+        visibility: visible;
     }
     
 
@@ -23,6 +27,28 @@
                 }
                 
             }
+
+            .nav-links {
+                position: fixed;
+                top: 55px;
+                
+                .column-link {
+                    background-color: $darkBlue;
+                    color: $grey;
+
+                    &:hover {
+                        color: $darkBlue;
+                        background-color: $greyer;
+                        border-top: 1px solid $greyer;
+                    }
+                }
+            }
+
+            .logout-button {
+                position: absolute;
+                bottom: 0;
+                right: 0;
+            }
             
         }
 
@@ -40,6 +66,52 @@
                 
 
             }
+        }
+    }
+}
+
+@media (max-width: 810px) {
+    .login {
+        .login-container {
+            width: 350px;
+            height: 300px;
+
+            .login-wrapper {
+
+                .login-title {
+                    margin-bottom: 10px;
+                }
+            }
+        }
+
+        .login-form {
+
+            #error {
+                margin-bottom: 5px;
+            }
+            .form input{
+                width: 280px;
+                height: 40px;
+                margin-bottom: 5px;
+                margin-top: 5px;
+            }
+
+            #button {
+                width: 280px;
+            }
+
+            .create-account-link {
+                padding-bottom: 8px;
+            }
+        }
+    }
+}
+
+@media (max-width: 810px) {
+    .create-account {
+        .create-account-container {
+            width: 380px;
+            height: 480px;
         }
     }
 }

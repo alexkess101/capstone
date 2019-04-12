@@ -16,12 +16,14 @@ export default class HomePage extends Component{
             endDate: "",
             avgContractValue: "",
             commission: '',
-            salesPerDay: ''
+            salesPerDay: '',
+            toggle: true
         }
 
         this.logout = this.logout.bind(this);
         this.salesPerDay = this.salesPerDay.bind(this);
         this.average = this.average.bind(this);
+        this.toggleFunc = this.toggleFunc.bind(this);
     }
 
     componentDidMount(){
@@ -42,6 +44,7 @@ export default class HomePage extends Component{
                 startDate: resultData[6],
                 endDate: resultData[7],
                 commission: resultData[5]
+                
             })
             this.average();
             this.salesPerDay();
@@ -103,12 +106,18 @@ export default class HomePage extends Component{
 
     }
 
+    toggleFunc() {
+        this.setState({
+            toggle: !this.state.toggle
+        })
+    }
+
     render() {
         return (
             <div className="homepage">
                 <div className="left-column">
                     <div className="menu">
-                        <i class="fas fa-bars"></i>
+                        <i class="fas fa-bars" onClick={this.toggleFunc}></i>
                     </div>
                     
                     <div className="user-info">
@@ -117,13 +126,13 @@ export default class HomePage extends Component{
                     <div className="user-email">Welcome {Cookies.get('session_email')}</div>
                     <div className="nav-links">
                         
-                        <NavLink to={`/home/${Cookies.get('session_id')}`} className="column-link">DASHBOARD</NavLink>
-                        <NavLink to={`/about_us/${Cookies.get('session_id')}`} className="column-link">ABOUT US</NavLink>
-                        <NavLink to={`/settings/${Cookies.get('session_id')}`} className="column-link bottom-link">SETTINGS</NavLink>
+                        <NavLink to={`/home/${Cookies.get('session_id')}`} className={`column-link ${this.state.toggle ? null : 'visible'}`}>DASHBOARD</NavLink>
+                        <NavLink to={`/about_us/${Cookies.get('session_id')}`} className={`column-link ${this.state.toggle ? null : 'visible'}`}>ABOUT US</NavLink>
+                        <NavLink to={`/settings/${Cookies.get('session_id')}`} className={`column-link bottom-link ${this.state.toggle ? null : 'visible'}`}>SETTINGS</NavLink>
 
                     </div>
                     
-                    <button onClick={this.logout} className="logout-button">Logout</button>
+                    <button onClick={this.logout} className='logout-button'>Logout</button>
                 </div>
                 
                 <div className="right-column">
