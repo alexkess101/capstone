@@ -70,7 +70,9 @@ const Login = (props) => {
         <div className = 'login'>
             <div className="login-container">
                 <div className="login-wrapper">
+                <div>
                     <h1>Clearer</h1>
+                </div>
                     <form onSubmit={handleSubmit} className="login-form">
                         {errorText !== "" ? <div id="error">{errorText}</div> : <div id ='error'></div>}
                         <div className="form">
