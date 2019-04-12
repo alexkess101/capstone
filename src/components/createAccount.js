@@ -113,7 +113,10 @@ const createAccount = (props) => {
         <div className="create-account">
             <div className="create-account-container">
                 <div className="create-account-wrapper">
-                    <h1>Create an Account</h1>
+                <div className="login-title">
+                    Create an Account
+                </div>
+                    
 
                     <form onSubmit={checkForms}>
                         {errorText !== "" ? <div id="error">{errorText}</div> : <div id ='error'></div>}
