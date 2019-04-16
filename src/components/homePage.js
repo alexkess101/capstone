@@ -17,7 +17,8 @@ export default class HomePage extends Component{
             avgContractValue: "",
             commission: '',
             salesPerDay: '',
-            toggle: true
+            toggle: true,
+            totalIncome: ""
         }
 
         this.logout = this.logout.bind(this);
@@ -73,9 +74,11 @@ export default class HomePage extends Component{
             sum += parseInt(newArray[i])
         }
         let average = Math.floor(sum / newArray.length)
+        let totalIncome = sum * parseFloat(this.state.commission);
         
         this.setState({
-            avgContractValue: average
+            avgContractValue: average,
+            totalIncome: totalIncome
         })
     }
    logout(){
@@ -139,7 +142,7 @@ export default class HomePage extends Component{
                     <div className="tablet-wrapper">
                         <div className="tablet progress-tablet">
                             <h3>income Goal: {this.state.data[0]}</h3>
-                            <h3>Current income: {this.state.data[1]}</h3>
+                            <h3>Current income: {this.state.totalIncome}</h3>
                         
                         </div>
                     </div>

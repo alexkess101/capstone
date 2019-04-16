@@ -2,7 +2,6 @@ import React, {Component, useState, useEffect} from 'react';
 import { withRouter } from 'react-router';
 import DatePicker from "react-datepicker";
 import Cookies from 'js-cookie';
-import axios from 'axios';
 
 const Settings = (props) => {
     const [email, setEmail] = useState("");
