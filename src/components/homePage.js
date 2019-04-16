@@ -37,7 +37,7 @@ export default class HomePage extends Component{
         })
         .then(result => {return result.json()})
         .then(resultData => {
-        
+            
             this.setState({
                 data: resultData,
                 valueArray: resultData[4],
@@ -99,7 +99,7 @@ export default class HomePage extends Component{
 
         salesNeeded = Math.round(toGo / perSaleValue);
         salesPerDay = salesNeeded / daysLeft;
-        console.log(salesNeeded, daysLeft, parseFloat(salesPerDay.toFixed(2)));
+        
         this.setState({
             salesPerDay: parseFloat(salesPerDay.toFixed(2))
         })
@@ -138,7 +138,7 @@ export default class HomePage extends Component{
                 <div className="right-column">
                     <div className="tablet-wrapper">
                         <div className="tablet progress-tablet">
-                            <h3>Sales Goal: {this.state.data[0]}</h3>
+                            <h3>income Goal: {this.state.data[0]}</h3>
                             <h3>Current income: {this.state.data[1]}</h3>
                         
                         </div>
