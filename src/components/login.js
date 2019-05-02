@@ -4,11 +4,13 @@ import { withRouter } from 'react-router';
 import { TimelineLite } from "gsap/all";
 import LoadingOverlay from 'react-loading-overlay';
 
+
 const Login = (props) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errorText, setErrorText] = useState("");
     const [isLoaded, setIsLoadedValue] = useState(false);
+    let bcrypt = require('bcryptjs');
     
 
     useEffect(() => {
@@ -38,11 +40,11 @@ const Login = (props) => {
         .then(data => { return data.json() })
         .then(responseData => {
 
-            if(require('password-hash').verify(password, responseData[0][2])){
+            if(bcrypt.compareSync(password, responseData[0][2])){
                 let id = responseData[0][0];
                 let email = responseData[0][1];
                 props.handleUserLogin(id, email);
-                props.history.push(`/home/${id}`);
+                props.history.push(`/home`);
             } else {
                 setIsLoadedValue(false)
                 setErrorText("Incorrect password");
@@ -55,9 +57,6 @@ const Login = (props) => {
         })
       
     }
-
-
-  
 
 
     return (

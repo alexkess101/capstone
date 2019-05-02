@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Cookies from 'js-cookie';
 import { NavLink } from 'react-router-dom';
 import LoadingOverlay from 'react-loading-overlay';
 
@@ -17,7 +16,8 @@ export default class ViewSales extends Component {
     }
 
     componentDidMount() {
-        fetch(`https://ak-clearsummer.herokuapp.com/sale/${Cookies.get('session_id')}/view_sales`, {
+        
+        fetch(`https://ak-clearsummer.herokuapp.com/sale/${sessionStorage.getItem('user_id')}/view_sales`, {
             method: ['GET'],
             headers: {
                 "accepts": "application/json",
@@ -35,7 +35,7 @@ export default class ViewSales extends Component {
 
     handleExit() {
         event.preventDefault();
-        this.props.history.push(`/home/${Cookies.get('session_id')}`);
+        this.props.history.push(`/home`);
         
     }
 
@@ -52,7 +52,7 @@ export default class ViewSales extends Component {
                     fadeSpeed={200}
                 >
                     This is where you see your sales
-                    <NavLink to={`/home/${Cookies.get('session_id')}`}>Exit</NavLink>
+                    <NavLink to={`/home`}>Exit</NavLink>
                     
                     {
                         this.state.saleData.map(item => {

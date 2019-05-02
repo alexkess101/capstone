@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { NavLink } from 'react-router-dom';
-import Cookies from 'js-cookie';
 
 export default class CreateSale extends Component {
     constructor(props) {
@@ -23,7 +22,7 @@ export default class CreateSale extends Component {
         let addValue = parseFloat(this.state.value);
 
         event.preventDefault();
-        fetch(`https://ak-clearsummer.herokuapp.com/home/${Cookies.get('session_id')}/create_sale`, {
+        fetch(`https://ak-clearsummer.herokuapp.com/home/${sessionStorage.getItem('user_id')}/create_sale`, {
             method: 'POST',
             headers: {
                 "accepts": "application/json",
@@ -42,14 +41,14 @@ export default class CreateSale extends Component {
                 value: null
             })
             returnData.json()
-            this.props.history.push(`/home/${Cookies.get('session_id')}`)
+            this.props.history.push(`/home`)
         })
         .catch(err => {console.log(err)})        
     }
 
     handleExit() {
         event.preventDefault();
-        this.props.history.push(`/home/${Cookies.get('session_id')}`);
+        this.props.history.push(`/home`);
         console.log(this.props)
     }
 
@@ -103,7 +102,7 @@ export default class CreateSale extends Component {
 
                         <button type="submit">Add Sale</button>
 
-                        <NavLink to={`/home/${Cookies.get('session_id')}`}>Exit </NavLink>
+                        <NavLink to={`/home`}>Exit </NavLink>
                     </form>
                 </div>
 

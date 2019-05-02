@@ -13,6 +13,7 @@ import Cookies from 'js-cookie';
 
 
 
+
 export default class App extends Component {
   constructor() {
     super()
@@ -30,7 +31,7 @@ export default class App extends Component {
 
   handleUserLogin(userId, userEmail) {
     Cookies.set('session', 'LOGGED_IN');
-    Cookies.set('session_id', userId);
+    sessionStorage.setItem("user_id", userId);
     Cookies.set('session_email', userEmail);
     
     this.setState({
@@ -41,7 +42,7 @@ export default class App extends Component {
 
   handleUserLogout() {
     Cookies.remove('session');
-    Cookies.remove('session_id');
+    sessionStorage.removeItem("user_id");
     Cookies.remove('session_email');
 
     this.setState({
@@ -67,7 +68,7 @@ export default class App extends Component {
             />
             {
               Cookies.get('session') === "LOGGED_IN" ? 
-              <Route path="/home/:id" render={props => 
+              <Route path="/home" render={props => 
                 <Home
                   {...props}
                   loggedInStatus={this.state.loggedInStatus}
@@ -83,7 +84,7 @@ export default class App extends Component {
 
             {
               Cookies.get('session') === "LOGGED_IN" ? 
-              <Route path="/home/:id/create_sale" render={props => 
+              <Route path="/home/create_sale" render={props => 
                 <CreateSale
                   {...props}
                   loggedInStatus={this.state.loggedInStatus}
@@ -100,7 +101,7 @@ export default class App extends Component {
 
             {
               Cookies.get('session') === "LOGGED_IN" ? 
-              <Route path="/home/:id/view_sales" render={props => 
+              <Route path="/home/view_sales" render={props => 
                 <ViewSale
                   {...props}
                   loggedInStatus={this.state.loggedInStatus}
@@ -116,7 +117,7 @@ export default class App extends Component {
 
             { 
               Cookies.get('session') === "LOGGED_IN" ? 
-              <Route path="/about_us/:id" render={props => 
+              <Route path="/about_us" render={props => 
                 <AboutUs
                   {...props}
                   loggedInStatus={this.state.loggedInStatus}
@@ -132,7 +133,7 @@ export default class App extends Component {
 
             { 
               Cookies.get('session') === "LOGGED_IN" ? 
-              <Route path="/settings/:id" render={props => 
+              <Route path="/settings" render={props => 
                 <Settings
                   {...props}
                   loggedInStatus={this.state.loggedInStatus}

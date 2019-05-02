@@ -19,12 +19,12 @@ const createAccount = (props) => {
     const [numSalesGoalValues, setNumSalesGoalValues] = useState([])
     const [incomeTotalValues, setIncomeTotalValues] = useState([])
     const [errorText, setErrorText] = useState("");
+    let bcrypt = require('bcryptjs');
+    let salt = bcrypt.genSaltSync(10);
     
 
 
     useEffect(() => {
- 
-
         let numSalesGoalValueList = [];
         let incomeTotalValueList = [];
         let t1 = new TimelineLite();
@@ -59,7 +59,7 @@ const createAccount = (props) => {
     const handleCreateUser = () => {
         setIsLoadedValue(true);
         let addEmail = email;
-        let addPassword = require('password-hash').generate(password);
+        let addPassword = bcrypt.hashSync(password, salt);
         let addStartDate = startDate;
         let addEndDate = endDate;
         let addCurrentSales = 0;
@@ -93,7 +93,7 @@ const createAccount = (props) => {
             let id = data[0][0];
             let email = data[0][1];
             props.handleUserLogin(id, email);
-            props.history.push(`/home/${id}`);
+            props.history.push(`/home`);
         })
         .catch(err => {
             setIsLoadedValue(false)

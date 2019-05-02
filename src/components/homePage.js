@@ -29,7 +29,7 @@ export default class HomePage extends Component{
 
     componentDidMount(){
 
-        fetch(`https://ak-clearsummer.herokuapp.com/home/${Cookies.get('session_id')}`, {
+        fetch(`https://ak-clearsummer.herokuapp.com/home/${sessionStorage.getItem('user_id')}`, {
             method: 'GET',
             headers: {
                 "accepts": "application/json",
@@ -57,7 +57,7 @@ export default class HomePage extends Component{
         let t1 = new TimelineLite();
 
         if (Cookies.get('session') === 'LOGGED_IN') {
-            this.props.history.push(`/home/${Cookies.get('session_id')}`)
+            this.props.history.push(`/home`)
         }
 
         t1.to('.left-column', 0.5, {x:200, opacity:1});
@@ -129,9 +129,9 @@ export default class HomePage extends Component{
                     <div className="user-email">Welcome {Cookies.get('session_email')}</div>
                     <div className="nav-links">
                         
-                        <NavLink to={`/home/${Cookies.get('session_id')}`} className={`column-link ${this.state.toggle ? null : 'visible'}`}>DASHBOARD</NavLink>
-                        <NavLink to={`/about_us/${Cookies.get('session_id')}`} className={`column-link ${this.state.toggle ? null : 'visible'}`}>ABOUT US</NavLink>
-                        <NavLink to={`/settings/${Cookies.get('session_id')}`} className={`column-link bottom-link ${this.state.toggle ? null : 'visible'}`}>SETTINGS</NavLink>
+                        <NavLink to={`/home`} className={`column-link ${this.state.toggle ? null : 'visible'}`}>DASHBOARD</NavLink>
+                        <NavLink to={`/about_us`} className={`column-link ${this.state.toggle ? null : 'visible'}`}>ABOUT US</NavLink>
+                        <NavLink to={`/settings`} className={`column-link bottom-link ${this.state.toggle ? null : 'visible'}`}>SETTINGS</NavLink>
 
                     </div>
                     
@@ -152,8 +152,8 @@ export default class HomePage extends Component{
                             <h3>Current sales: {this.state.data[3]}</h3>
 
 
-                            <NavLink to={`/home/${Cookies.get('session_id')}/view_sales`}>Click Here to view all your sales</NavLink>
-                            <NavLink to={`/home/${Cookies.get('session_id')}/create_sale`}>Click Here to Add sale</NavLink>
+                            <NavLink to={`/home/view_sales`}>Click Here to view all your sales</NavLink>
+                            <NavLink to={`/home/create_sale`}>Click Here to Add sale</NavLink>
 
                         </div>
                     </div>

@@ -33,7 +33,7 @@ const Settings = (props) => {
 
         
 
-        fetch(`https://ak-clearsummer.herokuapp.com/home/${Cookies.get('session_id')}`, {
+        fetch(`https://ak-clearsummer.herokuapp.com/home/${sessionStorage.getItem('user_id')}`, {
             method: 'GET',
             headers: {
                 "accepts": "application/json",
@@ -59,7 +59,7 @@ const Settings = (props) => {
     const handleSubmit = () => {
         event.preventDefault();
 
-        fetch(`https://ak-clearsummer.herokuapp.com/settings/${Cookies.get('session_id')}`, {
+        fetch(`https://ak-clearsummer.herokuapp.com/settings/${sessionStorage.getItem('user_id')}`, {
             method: 'PUT',
             headers: {
                 "accepts": "application/json",
