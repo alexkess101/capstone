@@ -43,13 +43,12 @@ export default class CreateSale extends Component {
             returnData.json()
             this.props.history.push(`/home`)
         })
-        .catch(err => {console.log(err)})        
+        .catch(err => {console.log(err)})   
     }
 
     handleExit() {
-        event.preventDefault();
         this.props.history.push(`/home`);
-        console.log(this.props)
+
     }
 
 
